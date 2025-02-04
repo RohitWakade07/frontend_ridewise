@@ -1,3 +1,15 @@
+buildscript {
+    repositories {
+        google()  // Google's Maven repository for Firebase
+        mavenCentral()
+    }
+    dependencies {
+        // Use the appropriate Android Gradle Plugin version for your setup
+        classpath 'com.android.tools.build:gradle:8.2.0'  // Update to match AGP version
+        classpath 'com.google.gms:google-services:4.3.15'  // Firebase Google services plugin
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -9,6 +21,7 @@ rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }

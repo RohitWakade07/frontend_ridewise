@@ -1,8 +1,9 @@
+// main.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/home_page.dart';
-import 'package:frontend/signup_page.dart';
-import 'firebase_options.dart';
+import 'package:frontend/features/auth/signup_page.dart';
+import 'package:frontend/features/home/ViewProfilePage.dart';  // Import the ProfilePage
+import 'core/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Task Management',
+      title: 'RideWise',
       theme: ThemeData(
         fontFamily: 'Cera Pro',
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -40,8 +41,6 @@ class MyApp extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              // Uncomment and replace with your desired color
-              // color: Pallete.gradient2,
               width: 3,
             ),
             borderRadius: BorderRadius.circular(10),
@@ -56,9 +55,11 @@ class MyApp extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          if (snapshot.data != null){
-            return const MyHomePage(email: '',);
+          if (snapshot.data != null) {
+            // After user is authenticated, show the Profile Page
+            return const ProfilePage(email: '', phone: '',);
           }
+          // If user is not authenticated, show SignUpPage
           return const SignUpPage();
         },
       ),

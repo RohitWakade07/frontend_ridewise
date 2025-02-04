@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'signup_page.dart';
+import 'package:frontend/features/auth/signup_page.dart';
+import '../home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -41,10 +41,12 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       final email = userCredential.user?.email ?? '';
+      final phone = userCredential.user?.phoneNumber ?? ''; // Fetch the phone number if available
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => MyHomePage(email: email),
+          builder: (context) => HomePage(email: email, phone: phone),
         ),
       );
     } on FirebaseAuthException catch (e) {
